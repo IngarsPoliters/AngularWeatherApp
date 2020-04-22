@@ -9,6 +9,8 @@ import {HttpClient} from '@angular/common/http';
 import {Platform} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
 
+import { Observable } from 'rxjs';
+
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 
 @NgModule({
@@ -48,11 +50,11 @@ export class Tab1PageModule {
     })
   }
   // this gets the current temperature based on your current location
-  GetCurrentTemperature(latitude, longitude){
+  GetCurrentTemperature(latitude, longitude):Observable<any>{
     //for my weather app I am using  openweathermap.org, I have signed up and requested appid key.
     var url = "https://api.openweathermap.org/data/2.5/onecall?lat="+latitude+"&lon="+longitude // assigns the weather api url to var and added lat and long 
     +"&appid="+this.appId;                                          //as the current position for your  weather data.
-    this.httpClient.get(url).subscribe((temperaturedata)=>{         // subscribe causes get request to execute on the api server
+   return this.httpClient.get(url).subscribe((temperaturedata)=>{         // subscribe causes get request to execute on the api server
       console.log('Data Received');
       console.log(latitude + " "+ longitude);
       
