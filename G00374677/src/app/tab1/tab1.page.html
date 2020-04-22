@@ -1,11 +1,13 @@
 
 
 <ion-content class="clear-weather">
-  <div class="ion-padding">
-    <span >{{temperature}}</span>
-    <span><img src={{icon}}><span style="position: relative;bottom:15px;"> 
-     in <h4>{{place}} </h4>
-    </span></span>
+  <div class="ion-padding" >
+    
+    <div style="text-align: center;"><img src={{icon}} width="120" height="120">
+      <span style="position: center;bottom:5px;"> 
+    
+    <h4>{{temperature}} </h4> <h4> {{country}}, </h4>  <h4> {{place}} </h4> 
+    </span></div>
 
   </div>
 </ion-content>
