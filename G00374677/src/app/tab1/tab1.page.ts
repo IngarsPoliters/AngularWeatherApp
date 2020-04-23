@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage';
 import { WeatherService } from '../Service/weather.service';
 import { Platform } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { stringify } from 'querystring';
+
 
 @Component({
   selector: 'app-tab1',
@@ -26,7 +25,10 @@ export class Tab1Page implements OnInit {
 
   background: string = "";
   appId: string = "3acfb956e3501bdf00bfd62a5fcd3c82"
-  constructor(private geolocation: Geolocation, private weatherService: WeatherService, private platform: Platform, private ionicStorage: Storage) {
+  constructor(private geolocation: Geolocation, 
+    private weatherService: WeatherService, 
+    private platform: Platform
+    ) {
   }
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class Tab1Page implements OnInit {
 
       this.weatherService.GetCurrentTemperature(latitude, longitude).subscribe((temperaturedata) => {         // subscribe causes get request to execute on the api server       // passes all the incoming temperature data to var temperaturedata
         this.description = temperaturedata.weather[0].main;
+        
         this.GetCurrentdescription(this.description);
         this.humidity = temperaturedata.main.humidity;
         this.pressure = temperaturedata.main.pressure;
@@ -71,7 +74,7 @@ export class Tab1Page implements OnInit {
       })
     })
   }
-  
+
   GetCurrentdescription(description) {
     console.log(description)
     if (description == "Clouds") { this.background = "cloudy-weather" }
