@@ -13,7 +13,16 @@ export class Tab1Page {
   country:string="";
   type:string="";
   icon:string="";
-  temperature:string="69";
+  temperature:string="";
+  humidity:string="";
+  uvIndex:string="";
+  description:string="";
+  pressure:string="";
+  feelsLike:string="";
+  tempMin:string="";
+  tempMax:string="";
+
+  background:string="";
   appId:string = "3acfb956e3501bdf00bfd62a5fcd3c82" 
   constructor(public httpClient:HttpClient, public geolocation:Geolocation, 
     public platform:Platform , private ionicStorage: Storage){
@@ -45,7 +54,11 @@ export class Tab1Page {
       console.log(latitude + " "+ longitude);
       
       var obj:any = temperaturedata;        // passes all the incoming temperature data to var obj
-      
+      this.description = obj.weather[0].main;
+      this.GetCurrentdescription(this.description);
+      this.humidity = obj.main.humidity;
+      this.pressure = obj.main.pressure;
+
       this.place = obj.name;            // and assigns each tempdata to its corresponding data.
       this.country = obj.sys.country;
       if(this.country == "IE"){this.country = "Ireland" }
@@ -55,10 +68,28 @@ export class Tab1Page {
       this.icon = "http://openweathermap.org/img/wn/"+obj.weather[0].icon // icon for what type of weather it is. eg. snow, rain, clear, windy.
       +"@2x.png";
       console.log(this.icon);
+
+      this.tempMin = ((parseFloat(obj.main.temp_min)-273.15)
+      .toFixed(2)).toString()+"°C"
+      this.tempMax = ((parseFloat(obj.main.temp_max)-273.15)
+      .toFixed(2)).toString()+"°C"
+
+      this.feelsLike = ((parseFloat(obj.main.feels_like)-273.15)
+      .toFixed(2)).toString()+"°C"
       this.temperature = ((parseFloat(obj.main.temp)-273.15) // temperature data comes in as Kelvin, so have to minus 1 kelvin to incoming value from api
       .toFixed(2)).toString()+"°C";
       console.log(this.temperature);
     })
+  }
+
+  GetCurrentdescription(description){
+    console.log(description)
+    if(description == "Clouds"){this.background = "cloudy-weather"}
+    if(description == "Clear"){this.background = "clear-weather"}
+    if(description == "Atmosphere"){this.background = "foggy-weather"}
+    if(description == "Snow"){this.background = "snow-weather"}
+    if(description == "Rain"){this.background = "rain-weather"}
+    if(description == "Thunderstorm"){this.background = "windy-weather"}
   }
 
 

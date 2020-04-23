@@ -1,13 +1,38 @@
 
 
-<ion-content class="clear-weather">
-  <div class="ion-padding" >
+<ion-content [ngClass]="background" >
+  <div >
     
-    <div style="text-align: center;"><img src={{icon}} width="120" height="120">
-      <span style="position: center;bottom:5px;"> 
+    <div class="weather-layout">
+      <h4> {{country}}, </h4>  <h4> {{place}} </h4> 
+      <img src={{icon}} width="120" height="120">
+      <span > 
+        <h4 style="position: relative;bottom: 30px;">{{description}} </h4> 
+        <h4>{{temperature}}</h4>
+        <h5>Feels like {{feelsLike}}</h5>
     
-    <h4>{{temperature}} </h4> <h4> {{country}}, </h4>  <h4> {{place}} </h4> 
     </span></div>
 
+    <table class="table-layout">
+      <tr>
+        <th>Humidity</th>
+        <th>Pressure</th>
+      </tr>
+      <tr>
+        <td><p>{{humidity}}%</p></td>
+        <td><p>{{pressure}}mb</p></td>
+      </tr>
+    </table>
+    <table class="table-layout2">
+      <tr>
+        <th>Min.<br> Temperature</th>
+        <th>Max.<br> Temperature</th>
+      </tr>
+      <tr>
+        <td>{{tempMin}}</td>
+        <td>{{tempMax}}</td>
+      </tr>
+      
+    </table>
   </div>
 </ion-content>
