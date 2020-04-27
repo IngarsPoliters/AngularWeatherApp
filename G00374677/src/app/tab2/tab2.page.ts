@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component , NgZone, ElementRef,ViewChild} from '@angular/core';
+import {Storage} from '@ionic/storage';
+
+
 
 
 @Component({
@@ -8,8 +11,14 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page  {
   background:string="";
-  constructor() {
+  constructor(public storage:Storage) {
+    storage.get('background').then((val) =>{
+      console.log("Background = ", val);
+      this.background = val;
+    })
   }
+
+  
   
 
 }

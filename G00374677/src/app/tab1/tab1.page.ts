@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../Service/weather.service';
 import { Platform } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tab1',
@@ -27,7 +27,8 @@ export class Tab1Page implements OnInit {
   appId: string = "3acfb956e3501bdf00bfd62a5fcd3c82"
   constructor(private geolocation: Geolocation, 
     private weatherService: WeatherService, 
-    private platform: Platform
+    private platform: Platform,
+    public storage:Storage
     ) {
   }
 
@@ -71,18 +72,26 @@ export class Tab1Page implements OnInit {
         this.temperature = ((parseFloat(temperaturedata.main.temp) - 273.15) // temperature data comes in as Kelvin, so have to minus 1 kelvin to incoming value from api
           .toFixed(2)).toString() + "°C";
         console.log(this.temperature);
+
+        
       })
     })
   }
 
   GetCurrentdescription(description) {
     console.log(description)
-    if (description == "Clouds") { this.background = "cloudy-weather" }
-    if (description == "Clear") { this.background = "clear-weather" }
-    if (description == "Atmosphere") { this.background = "foggy-weather" }
-    if (description == "Snow") { this.background = "snow-weather" }
-    if (description == "Rain") { this.background = "rain-weather" }
-    if (description == "Thunderstorm") { this.background = "windy-weather" }
+    if (description == "Clouds") { this.background = "cloudy-weather";
+      this.storage.set('background', this.background); }
+    if (description == "Clear") { this.background = "clear-weather";
+      this.storage.set('background', this.background); }
+    if (description == "Atmosphere") { this.background = "foggy-weather";
+      this.storage.set('background', this.background); }
+    if (description == "Snow") { this.background = "snow-weather";
+    this.storage.set('background', this.background); }
+    if (description == "Rain") { this.background = "rain-weather";
+    this.storage.set('background', this.background); }
+    if (description == "Thunderstorm") { this.background = "windy-weather";
+    this.storage.set('background', this.background); }
   }
 }
 
