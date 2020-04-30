@@ -1,38 +1,47 @@
 
 
-<ion-content [ngClass]="background" >
-  <div >
-    
-    <div class="weather-layout">
-      <h4> {{country}}, </h4>  <h4> {{place}} </h4> 
-      <img src={{icon}} width="120" height="120">
-      <span > 
-        <h4 style="position: relative;bottom: 30px;">{{description}} </h4> 
-        <h4>{{temperature}}</h4>
-        <h5>Feels like {{feelsLike}}</h5>
-    
-    </span></div>
-
-    <table class="table-layout">
-      <tr>
-        <th>Humidity</th>
-        <th>Pressure</th>
-      </tr>
-      <tr>
-        <td><p>{{humidity}}%</p></td>
-        <td><p>{{pressure}}mb</p></td>
-      </tr>
-    </table>
-    <table class="table-layout2">
-      <tr>
-        <th>Min.<br> Temperature</th>
-        <th>Max.<br> Temperature</th>
-      </tr>
-      <tr>
-        <td>{{tempMin}}</td>
-        <td>{{tempMax}}</td>
-      </tr>
-      
-    </table>
+<ion-content [ngClass]="background">
+  <div class="weather-layout"> 
+    <h4>{{weatherData.name}}, {{weatherData.region}},</h4>
+    <h4>{{weatherData.country}}</h4>
+    <img src="{{weatherData.conditionIcon}}" width="100" height="100">
+    <h4>{{weatherData.conditionText}}</h4>
+    <h4>{{weatherData.temp_c}}°C</h4>
+    <p>Feels Like {{weatherData.feelsLike_c}}°C </p>
   </div>
+
+  <table class="table-layout">
+    <tr>
+      <th>Humidity</th>
+      <th>UV Index</th>
+    </tr>
+    <tr>
+      <td><p>{{weatherData.humidity}}</p></td>
+      <td><p>{{weatherData.uvIndex}}</p></td>
+    </tr>
+  </table>
+  <table class="table-layout2">
+    <tr>
+      <th>Pressure</th>
+      <th>Wind Direction</th>
+    </tr>
+    <tr>
+      <td>{{weatherData.pressure_mb}}mb</td>
+      <td>{{weatherData.wind_direction}}</td>
+    </tr>
+  </table>
+  <table class="table-layout2">
+    <tr>
+      <th>Local Time</th>
+    </tr>
+    <tr>
+      <td>{{weatherData.localtime}}</td>
+    </tr>
+  </table>
+
+
+
+
+
+
 </ion-content>

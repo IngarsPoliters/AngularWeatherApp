@@ -1,40 +1,35 @@
 ion-content ion-toolbar {
-  --background: translucent;
-}
-
-.table-layout {
-  table-layout: fixed;
-  width: 100%;
-  margin-top: 80px;
-}
-.table-layout th{
-  border-right: 1px solid #909090;
-  border-top: 1px solid #909090;
-  padding-top: 10px;
-}
-.table-layout td{
-  text-align: center;
-  border-right: 1px solid #909090;
-}
-
-.table-layout2{
-  table-layout: fixed;
-  width: 100%;
-  margin-top: 30px;
-}
-
-.table-layout2 th{
-  border-right: 1px solid #909090;
-  padding-bottom: 10px;
-}
-.table-layout2 td{
-  text-align: center;
-  border-right: 1px solid #909090;
-}
-
-
-.weather-layout{
-  text-align: center;
-  padding-top: 50px;
-}
-
+    --background: translucent;
+  }
+  
+  .table-layout {
+    table-layout: fixed;
+    width: 100%;
+    margin-top: 80px;
+  }
+  .table-layout th{
+    padding-top: 10px;
+  }
+  .table-layout td{
+    text-align: center;
+  }
+  
+  .table-layout2{
+    table-layout: fixed;
+    width: 100%;
+    margin-top: 30px;
+  }
+  
+  .table-layout2 th{
+    padding-bottom: 10px;
+  }
+  .table-layout2 td{
+    text-align: center;
+  }
+  
+  .weather-layout{
+    text-align: center;
+    padding-top: 50px;
+  }
+  
+  
