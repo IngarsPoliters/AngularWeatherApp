@@ -6,12 +6,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [ngClass]="background">
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <!-- Toggles in a List -->
+
+  <ion-item class="ion-item">
+    <ion-label>Display in Farenheit</ion-label>
+    <ion-toggle [(ngModel)]="toggleF" (ionChange)="change()"></ion-toggle>
+  </ion-item>
+
+  <ion-item class="ion-item" (click)="openAbout()">
+    
+      <ion-label >About Page </ion-label>
+  
+  </ion-item>
+
+
+
 </ion-content>

@@ -12,6 +12,7 @@ import { MapsAPILoader } from '@agm/core';
 })
 export class Tab1Page {
   background: string = "";
+  public toggleF: boolean = false;
 
   constructor(private geolocation: Geolocation,
     private weatherService: WeatherService,
@@ -40,9 +41,16 @@ export class Tab1Page {
     feelsLike_c: "",
     feelsLike_f: "",
     uvIndex: "",
+    faren: "°F",
+    celsius: "°C",
   }
 
   ionViewDidEnter() {
+
+    this.storage.get('toggleF').then((value) => {
+      this.toggleF = value;
+      console.log(this.toggleF);
+    })
 
     this.storage.get('location').then((value) => {
       if (value != null) {
@@ -88,9 +96,20 @@ export class Tab1Page {
       this.weatherData.feelsLike_c = tempData.current.feelslike_c;
       this.weatherData.feelsLike_f = tempData.current.feelslike_f;
       this.weatherData.uvIndex = tempData.current.uv;
-
+      
+      this.displayTempUnit();
       this.GetCurrentdescription(this.weatherData.conditionText);
     })
+  }
+
+  displayTempUnit(){
+    if (this.toggleF == true) {
+      this.weatherData.temp_c = this.weatherData.temp_f + this.weatherData.faren;
+      this.weatherData.feelsLike_c = this.weatherData.feelsLike_f + this.weatherData.faren;
+    } else {
+      this.weatherData.temp_c = this.weatherData.temp_c + this.weatherData.celsius;
+      this.weatherData.feelsLike_c = this.weatherData.feelsLike_c + this.weatherData.celsius;
+    }
   }
 
   GetCurrentdescription(description) {
@@ -134,7 +153,7 @@ export class Tab1Page {
       || description == "Heavy rain at times" || description == "Heavy rain"
       || description == "Light freezing rain" || description == "Moderate or heavy freezing rain"
       || description == "Light rain shower" || description == "Moderate or heavy rain shower"
-      || description == "Torrential rain shower"  ) {
+      || description == "Torrential rain shower") {
       this.background = "rain-weather";
       this.storage.set('background', this.background);
     }
