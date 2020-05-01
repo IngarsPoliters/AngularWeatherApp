@@ -20,12 +20,12 @@ export class Tab1Page {
     private platform: Platform,
     private storage: Storage
   ) { }
-
+  // lat and long information
   coords: {
     latitude: number;
     longitude: number;
   }
-
+  // incoming weather data from weather API 
   weatherData = {
     name: "",
     region: "",
@@ -46,12 +46,12 @@ export class Tab1Page {
   }
 
   ionViewDidEnter() {
-
+    // verify if toggle is true or false, and assign value. 
     this.storage.get('toggleF').then((value) => {
       this.toggleF = value;
       console.log(this.toggleF);
     })
-
+    // retreives searched location from storage, and gets current data for searched area 
     this.storage.get('location').then((value) => {
       if (value != null) {
         this.coords = JSON.parse(value);
@@ -63,23 +63,14 @@ export class Tab1Page {
             latitude: pos.coords.latitude,
             longitude: pos.coords.longitude,
           }
-          this.storage.set('currentLoc', JSON.stringify(this.coords));
-
           console.log(this.coords);
           this.getCurrentWeatherData(this.coords.latitude, this.coords.longitude);
         })
-
       }
     })
-
-
-
-    // get current location weather data
-
-
-
   }// end of ionViewDidEnter
 
+  // subscribes to my weather api and store the incoming data for display
   getCurrentWeatherData(latitude, longitude) {
     this.weatherService.GetCurrentTemperature(latitude, longitude).subscribe((tempData) => {
       this.weatherData.name = tempData.location.name;
@@ -96,13 +87,14 @@ export class Tab1Page {
       this.weatherData.feelsLike_c = tempData.current.feelslike_c;
       this.weatherData.feelsLike_f = tempData.current.feelslike_f;
       this.weatherData.uvIndex = tempData.current.uv;
-      
+      // if temperature toggle true or false , then change the temperature units accordingly 
       this.displayTempUnit();
+      // gets the current background according to the condition text
       this.GetCurrentdescription(this.weatherData.conditionText);
     })
   }
-
-  displayTempUnit(){
+  // temperature unit display
+  displayTempUnit() {
     if (this.toggleF == true) {
       this.weatherData.temp_c = this.weatherData.temp_f + this.weatherData.faren;
       this.weatherData.feelsLike_c = this.weatherData.feelsLike_f + this.weatherData.faren;
@@ -112,15 +104,13 @@ export class Tab1Page {
     }
   }
 
+  // dynamic background
   GetCurrentdescription(description) {
     console.log(description)
     if (description == "Cloudy" || description == "Overcast") {
       this.background = "cloudy-weather";
       this.storage.set('background', this.background);
     }
-
-
-
     if (description == "Clear" || description == "Sunny" || description == "Partly cloudy") {
       this.background = "clear-weather";
       this.storage.set('background', this.background);

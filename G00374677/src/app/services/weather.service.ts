@@ -11,11 +11,11 @@ export class WeatherService {
   constructor(private httpClient: HttpClient) { }
 
   GetCurrentTemperature(latitude, longitute): Observable<any> {
-    //for my weather app I am using  openweathermap.org, I have signed up and requested appid key.
+    // I have signed up and requested appid key.
     var url = "http://api.weatherapi.com/v1/current.json?key="+this.weatherAPI+"&q="+
       latitude+","+longitute;
     // assigns the weather api url to var and added lat and long 
-                                          //as the current position for your  weather data.
+                                          //as the current position for my weather data.
     return this.httpClient.get(url);
   } 
 }

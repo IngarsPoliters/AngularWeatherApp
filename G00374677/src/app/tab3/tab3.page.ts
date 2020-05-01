@@ -14,16 +14,17 @@ export class Tab3Page {
   aboutPage = AboutPage;
 
   constructor(private storage:Storage, private navControl: NavController) {
+    // Storage access for dynamic background
     this.storage.get('background').then((value) =>{
       this.background = value;
     })
   }
-
+  // if toggle "change to farenheight " then all values will be changed from Celsius to Farenheit
   change(){
     this.storage.set('toggleF', this.toggleF);
     console.log(this.toggleF);
   }
-
+  // clicked event triggered on ion-item to open about page.
   openAbout(){
     this.navControl.navigateForward('/about');
   }

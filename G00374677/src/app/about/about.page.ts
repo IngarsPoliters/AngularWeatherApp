@@ -12,6 +12,7 @@ export class AboutPage implements OnInit {
   constructor(private storage:Storage) { }
 
   ngOnInit() {
+    // storage access to get background value for dynamic background
     this.storage.get('background').then((value) =>{
       this.background = value;
     })
